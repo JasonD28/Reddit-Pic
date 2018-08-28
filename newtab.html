@@ -1,10 +1,10 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 
 <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css">
 
 <style>
-  h1{
+  h1 {
     height: 40px;
   }
   img {
@@ -12,41 +12,40 @@
     max-width: 120vh;
     vertical-align: middle;
   }
-  #weather{
+  #weather {
     font-family: Merriweather, monospace;
     font-size: 50px;
     color: white;
     width: 210px;
     position: absolute;
     top: 30.5% ;
-    right: 100px;
+    right: 6.5%;
   }
-  #redImg{
+  #redImg {
     border: 0px solid white;
     border-radius: 10px;
     /* width: auto; */
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   }
-  #time{
+  #time {
     font-family: Merriweather, monospace;
-    font-size: 30px;
     width: 210px;
     position: absolute;
     top: 35%;
-    left: 94.5px;
+    left: 6.1%;
     font-size: 45px;
     color: white;
   }
-  #date{
+  #date {
     font-family: Merriweather, monospace;
     font-size: 30px;
     color: white;
     width: 200px;
     position: absolute;
     top: 29.8%;
-    left: 100px;
+    left: 6.5%;
   }
-  #zipButton{
+  #zipButton {
     display: none;
     position: absolute;
     top: 48% ;
@@ -58,15 +57,15 @@
     top: 48% ;
     right: 159px;
   }
-  .center{
+  .center {
     text-align: center;
   }
-  .frame {
+  .border {
     height: 94vh;
     text-align: center; 
   }
 
-.helper {
+  .disp {
     display: inline-block;
     height: 100%;
     vertical-align: middle;
@@ -82,8 +81,8 @@
   <div class="center">
     <p id="date"></p>
     <p id="time"></p>
-    <div class="frame">
-      <span class="helper"></span><a id="redLink"><img id="redImg" /></a>
+    <div class="border">
+      <span class="disp"></span><a id="redLink"><img id="redImg" /></a>
     </div>
     <p id="weather"></p>
     <form id="formy">
