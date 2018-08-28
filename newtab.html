@@ -1,0 +1,101 @@
+﻿<!doctype html>
+<html>
+
+<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css">
+
+<style>
+  h1{
+    height: 40px;
+  }
+  img {
+    max-height: 94vh;
+    max-width: 120vh;
+    vertical-align: middle;
+  }
+  #weather{
+    font-family: Merriweather, monospace;
+    font-size: 50px;
+    color: white;
+    width: 210px;
+    position: absolute;
+    top: 30.5% ;
+    right: 100px;
+  }
+  #redImg{
+    border: 0px solid white;
+    border-radius: 10px;
+    /* width: auto; */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+  #time{
+    font-family: Merriweather, monospace;
+    font-size: 30px;
+    width: 210px;
+    position: absolute;
+    top: 35%;
+    left: 94.5px;
+    font-size: 45px;
+    color: white;
+  }
+  #date{
+    font-family: Merriweather, monospace;
+    font-size: 30px;
+    color: white;
+    width: 200px;
+    position: absolute;
+    top: 29.8%;
+    left: 100px;
+  }
+  #zipButton{
+    display: none;
+    position: absolute;
+    top: 48% ;
+    right: 96px;
+  }
+  #zip {
+    display: none;
+    position: absolute;
+    top: 48% ;
+    right: 159px;
+  }
+  .center{
+    text-align: center;
+  }
+  .frame {
+    height: 94vh;
+    text-align: center; 
+  }
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+  
+</style>
+
+<head>
+  <title>New Tab</title>
+</head>
+
+<body>
+  <div class="center">
+    <p id="date"></p>
+    <p id="time"></p>
+    <div class="frame">
+      <span class="helper"></span><a id="redLink"><img id="redImg" /></a>
+    </div>
+    <p id="weather"></p>
+    <form id="formy">
+      <input id="zip" type="text" placeholder="Enter New Zipcode">
+      <button id = "zipButton" type="submit">Change</button>
+    </form>
+    <p id="author" style="height: 11px; color: white;"></p>
+  </div>
+
+  <script type="text/javascript" src="scripts/time.js"></script>
+  <script type="text/javascript" src="scripts/weather.js"></script>
+  <script type="text/javascript" src="scripts/redpic.js"></script>
+</body>
+
+</html>
