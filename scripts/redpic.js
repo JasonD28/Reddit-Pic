@@ -7,7 +7,7 @@ const dataStore = window.localStorage,
   colorKey = 'acc_457458c4a72d405',
   colorSecret = '95ccf132e52479dac7d8a312bdf42cef';
 
-let ki = {};
+let buttonObj = {0: 'do', 1: 're', 2: 'me'};
 
 function getAccessToken() { 
   //Gets the access token from the reddit api site then calls the getPost function
@@ -28,7 +28,7 @@ function getAccessToken() {
     }
   }).catch(error => console.error('Error:', error));
 
-  getPosts();
+  // getPosts();
 }
 
 function setPic(picUrl, picTitle, picLink, author){
@@ -46,19 +46,30 @@ function setPic(picUrl, picTitle, picLink, author){
   setColors(picUrl);
 }
 
-function getPosts(){
+function getPosts(postNum){
   //Grabs the URL, title, permalink, and author name of the top post of the day from r/itookapicture then calls setPic()
-  
+
+  if (dataStore.getItem('post')){ //Checks if user changed the default post displayed
+    postNum = dataStore.getItem('post');
+  }
+
   fetch('https://oauth.reddit.com/r/itookapicture/top/?sort=top&t=day', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${dataStore.getItem('access')}`
     }
   }).then(response=>response.json()).then(function(response){
-    console.log(JSON.stringify(response));
-    setPic(response.data.children[0].data.url, response.data.children[0].data.title,
-      response.data.children[0].data.permalink, response.data.children[0].data.author);
+    setPic(response.data.children[postNum].data.url, response.data.children[postNum].data.title,
+      response.data.children[postNum].data.permalink, response.data.children[postNum].data.author);
   });
+
+  for(let key in buttonObj) { //Highlights the button connected to the current picture
+    if(key == postNum) {
+      document.getElementById(buttonObj[key]).style.border = "2.5px solid white";
+    } else {
+      document.getElementById(buttonObj[key]).style.border = "1px solid white";
+    }
+  }
 }
 
 
@@ -81,5 +92,31 @@ function setColors (imageURL) {
   });
 
 }
-
 getAccessToken();
+getPosts(0);
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('do').addEventListener('click', function() {
+    dataStore.setItem('post', 0);
+
+    chrome.tabs.query({active: true, currentWindow: true}, function (allTabs) { //Reloads the current tab
+      chrome.tabs.reload(allTabs[0].id);
+    });
+  });
+
+  document.getElementById('re').addEventListener('click', function() {
+    dataStore.setItem('post', 1);
+
+    chrome.tabs.query({active: true, currentWindow: true}, function (allTabs) { //Reloads the current tab
+      chrome.tabs.reload(allTabs[0].id);
+    });
+  });
+
+  document.getElementById('me').addEventListener('click', function() {
+    dataStore.setItem('post', 2);
+
+    chrome.tabs.query({active: true, currentWindow: true}, function (allTabs) { //Reloads the current tab
+      chrome.tabs.reload(allTabs[0].id);
+    });
+  });
+});
