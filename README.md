@@ -13,6 +13,7 @@ In order to get this developer version of the extension running on your own comp
 6. Open a new tab and view the extension!
 
 ### Using The Extension
-There are two interactive parts of this extension:
+There are three interactive parts of this extension:
 - Click on the image in order to go to its associated r/itookapicture subreddit post
 - Click on the temperature in order to enter a new zipcode
+- Click on one of the three buttons in the upper right corner to change the displayed picture
