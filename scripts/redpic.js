@@ -26,6 +26,9 @@ function getAccessToken() {
     if(response.access_token){
       dataStore.setItem('access', response.access_token);
     }
+    else{
+      console.log(response);
+    }
   }).catch(error => console.error('Error:', error));
 
   // getPosts();
@@ -36,6 +39,10 @@ function setPic(picUrl, picTitle, picLink, author){
 
   let pic = document.getElementById('redImg');
 
+  if(picUrl.slice(picUrl.length-3, picUrl.length) != "jpg") {
+    picUrl += ".jpg";
+  }
+
   pic.setAttribute("src",picUrl);
   pic.setAttribute("alt", picTitle);
 
@@ -43,7 +50,7 @@ function setPic(picUrl, picTitle, picLink, author){
   link.setAttribute('href', `${redURL}${picLink}`)
   document.getElementById('author').innerHTML = `Photo Taken By: Reddit User ${author}`;
 
-  setColors(picUrl);
+  setColors(picUrl, 0);
 }
 
 function getPosts(postNum){
@@ -73,22 +80,33 @@ function getPosts(postNum){
 }
 
 
-function setColors (imageURL) {
+function setColors (imageURL, callCount) {
   //Calls the Imagga API with the URL of the picture and sets the top 4 retrieved colors into a linear gradient background
   
   document.body.style.background = 'rgb(9, 87, 123)'; //Used when API returns an error or when working on extension in order help not exceed API limit
-
-  fetch('https://api.imagga.com/v1/colors?url=' + imageURL, {
+  
+  fetch('https://api.imagga.com/v2/colors?image_url=' + imageURL, {
     method: 'GET',
     headers: {
       Authorization: 'Basic ' + btoa(colorKey + ":" + colorSecret)
     }
   }).then(response =>response.json()).then(function(response){
-    document.body.style.background = `linear-gradient(45deg, 
-      ${response.results[0].info.image_colors[0].closest_palette_color_html_code},
-      ${response.results[0].info.image_colors[2].closest_palette_color_html_code},
-      ${response.results[0].info.image_colors[1].closest_palette_color_html_code},
-      ${response.results[0].info.image_colors[3].closest_palette_color_html_code})`;
+    try{
+    document.body.style.background = `linear-gradient(60deg, 
+      ${response.result.colors.image_colors[1].closest_palette_color_html_code},
+      ${response.result.colors.image_colors[0].closest_palette_color_html_code},
+      ${response.result.colors.image_colors[2].closest_palette_color_html_code},
+      ${response.result.colors.image_colors[0].closest_palette_color_html_code},
+      ${response.result.colors.image_colors[1].closest_palette_color_html_code})`;
+    }
+    catch(err){
+      console.log(callCount);
+      if(callCount > 3){
+        document.body.style.background = `${response.result.colors.image_colors[0].closest_palette_color_html_code}`;
+      }
+      callCount++;
+      setColors(imageURL, callCount);
+    }
   });
 
 }
