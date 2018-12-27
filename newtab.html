@@ -1,30 +1,32 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 
 <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css">
 
 <style>
-  h1 {
-    height: 40px;
-  }
   img {
     max-height: 94vh;
     max-width: 120vh;
     vertical-align: middle;
   }
+  button:focus {
+    outline: 0;
+  }
   #weather {
     font-family: Merriweather, monospace;
     font-size: 50px;
     color: white;
-    width: 210px;
+    width: 250px;
     position: absolute;
-    top: 30.5% ;
-    right: 6.5%;
+    top: 37.5% ;
+    right: 5.3%;
+    background-color: transparent;
+    border: 0px solid white;
+    cursor: pointer;
   }
   #redImg {
     border: 0px solid white;
     border-radius: 10px;
-    /* width: auto; */
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   }
   #time {
@@ -35,15 +37,15 @@
     left: 6.1%;
     font-size: 45px;
     color: white;
-  }
+    }
   #date {
     font-family: Merriweather, monospace;
     font-size: 30px;
     color: white;
-    width: 200px;
+    width: 220px;
     position: absolute;
     top: 29.8%;
-    left: 6.5%;
+    left: 5.8%;
   }
   #zipButton {
     display: none;
@@ -56,6 +58,27 @@
     position: absolute;
     top: 48% ;
     right: 159px;
+  }
+  #re {
+    top: 0.5% ;
+    right: 3.5%;
+  }
+  #me {
+    top: 0.5% ;
+    right: 1%;
+  }
+  
+  .change {
+    background-color: transparent;
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid white;
+    top: 0.5% ;
+    right: 6%;
+    cursor: pointer;
   }
   .center {
     text-align: center;
@@ -79,12 +102,15 @@
 
 <body>
   <div class="center">
+    <button class="change" id="do">1</button>
+    <button class="change" id="re">2</button>
+    <button class="change" id="me">3</button>
     <p id="date"></p>
     <p id="time"></p>
     <div class="border">
       <span class="disp"></span><a id="redLink"><img id="redImg" /></a>
     </div>
-    <p id="weather"></p>
+    <button id="weather"></button>
     <form id="formy">
       <input id="zip" type="text" placeholder="Enter New Zipcode">
       <button id = "zipButton" type="submit">Change</button>

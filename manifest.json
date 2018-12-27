@@ -2,7 +2,7 @@
  "manifest_version": 2,
  "name": "Reddit Pic",
  "description": "Replace your new tab page with one accompanied by the top post of the day from r/itookapicture",
- "version": "1.1",
+ "version": "1.2",
  "author": "Jason Davis",
 "chrome_url_overrides" : {
   "newtab": "newtab.html"
